@@ -33,5 +33,7 @@ Route::delete('/section/{section}', [SectionController::class, 'destroy'])->midd
 //__Task__
 Route::post('/task/create/{section}', [TaskController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/task/{task}', [TaskController::class, 'update'])->middleware('auth:sanctum');
+Route::put('/task/status/{task}', [TaskController::class, 'updateStatus'])->middleware('auth:sanctum');
+Route::put('/task/archive/{task}', [TaskController::class, 'updateArchive'])->middleware('auth:sanctum');
 Route::delete('/task/{task}', [TaskController::class, 'destroy'])->middleware('auth:sanctum');
 Route::get('/task/{task}', [TaskController::class, 'show'])->middleware('auth:sanctum');

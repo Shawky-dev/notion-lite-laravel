@@ -17,8 +17,7 @@ class BoardServices extends BoardRelatedServices
     {
         $this->AuthUserForBoard($board, $user, 'You are not authorized to update this board.');
 
-        $board->title = $data['title'];
-        $board->description = $data['description'];
+        $board->fill($data);
         $board->save();
         return $board;
     }

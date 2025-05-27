@@ -19,7 +19,7 @@ class SectionServices extends BoardRelatedServices
     {
         $board = $section->board;
         $this->AuthUserForBoard($board, $user, 'User not permitted to update a section to this board');
-        $section->title = $data['title'];
+        $section->fill($data);
         $section->save();
         return $section;
     }
