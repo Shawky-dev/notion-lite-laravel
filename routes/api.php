@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BoardController;
+use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\TaskController;
+use App\Services\BoardServices;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,3 +19,19 @@ Route::get('/hi', function (): JsonResponse {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+//__Boards__
+Route::post('/board/create', [BoardController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/board/{board}', [BoardController::class, 'show'])->middleware('auth:sanctum');
+Route::put('/board/{board}', [BoardController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/board/{board}', [BoardController::class, 'destroy'])->middleware('auth:sanctum');
+
+//__Section__
+Route::post('/section/create/{board}', [SectionController::class, 'store'])->middleware('auth:sanctum');
+Route::put('/section/{section}', [SectionController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/section/{section}', [SectionController::class, 'destroy'])->middleware('auth:sanctum');
+
+//__Task__
+Route::post('/task/create/{section}', [TaskController::class, 'store'])->middleware('auth:sanctum');
+Route::put('/task/{task}', [TaskController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/task/{task}', [TaskController::class, 'destroy'])->middleware('auth:sanctum');
+Route::get('/task/{task}', [TaskController::class, 'show'])->middleware('auth:sanctum');

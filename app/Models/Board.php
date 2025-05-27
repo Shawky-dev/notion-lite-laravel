@@ -8,41 +8,44 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Board extends Model
 {
-    protected $creatorUser = null;
+    //temp value
 
     protected $fillable = [
         'title',
         'description'
     ];
 
-    public function setCreatorUser(User $user)
+    // In Board model
+    public static function createWithCreator(array $data, User $creatorUser): Board
     {
-        $this->creatorUser = $user;
-        return $this;
-    }
+        // Create board
+        $board = new self($data);
+        $board->save();
 
-    public static function booted()
-    {
-        static::created(function (Board $board) {
-            $defaultSections = [
-                'todo' => ['Task 1', 'Task 2', 'Task 3'],
-                'pending' => ['Task 4', 'Task 5'],
-                'completed' => ['Task 6', 'Task 7'],
-            ];
+        // Attach creator as member
+        $board->addUser($creatorUser);
 
-            foreach ($defaultSections as $sectionTitle => $tasks) {
-                $section = $board->sections()->create(['title' => $sectionTitle]);
-                foreach ($tasks as $taskTitle) {
-                    if ($board->creatorUser) {
-                        $section->tasks()->create([
-                            'title' => $taskTitle,
-                            'user_id' => $board->creatorUser->id
-                        ]);
-                    }
-                }
+        // Create default sections and tasks
+        $defaultSections = [
+            'todo' => ['Task 1', 'Task 2', 'Task 3'],
+            'pending' => ['Task 4', 'Task 5'],
+            'completed' => ['Task 6', 'Task 7'],
+        ];
+
+        foreach ($defaultSections as $sectionTitle => $tasks) {
+            $section = $board->sections()->create(['title' => $sectionTitle]);
+            foreach ($tasks as $taskTitle) {
+                $section->tasks()->create([
+                    'title' => $taskTitle,
+                    'user_id' => $creatorUser->id
+                ]);
             }
-        });
+        }
+
+        return $board;
     }
+
+
 
     public function users(): BelongsToMany
     {
