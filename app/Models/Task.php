@@ -17,4 +17,14 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function comments()
+    {
+        return $this->hasMany(TaskComment::class);
+    }
+
+    public function addTaskComment(TaskComment $comment): TaskComment
+    {
+        $this->comments()->save($comment);
+        return $comment;
+    }
 }

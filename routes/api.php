@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BoardController;
 use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\TaskCommentController;
 use App\Http\Controllers\Api\TaskController;
 use App\Services\BoardServices;
 use Illuminate\Http\JsonResponse;
@@ -37,3 +38,7 @@ Route::put('/task/status/{task}', [TaskController::class, 'updateStatus'])->midd
 Route::put('/task/archive/{task}', [TaskController::class, 'updateArchive'])->middleware('auth:sanctum');
 Route::delete('/task/{task}', [TaskController::class, 'destroy'])->middleware('auth:sanctum');
 Route::get('/task/{task}', [TaskController::class, 'show'])->middleware('auth:sanctum');
+
+//__Task Comment__
+Route::post('/taskComment/create/{task}', [TaskCommentController::class, 'store'])->middleware('auth:sanctum');
+Route::delete('/taskComment/{comment}', [TaskCommentController::class, 'updateComment'])->middleware('auth:sanctum');

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('task_comments', function (Blueprint $table) {
             $table->id();
             $table->string('text');
-            $table->boolean('deleted')->default(false);
 
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('task_comments')->onDelete('set null');
@@ -27,7 +26,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.`
      */
     public function down(): void
     {
