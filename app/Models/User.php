@@ -25,6 +25,18 @@ class User extends Authenticatable
             ->withPivot('joined_at')
             ->withTimestamps();
     }
+    public function initials()
+    {
+        // Assuming you have a 'name' attribute
+        $names = explode(' ', $this->name);
+        $initials = '';
+
+        foreach ($names as $word) {
+            $initials .= strtoupper(substr($word, 0, 1));
+        }
+
+        return $initials;
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Web\BoardController;
+use App\Livewire\Board\BoardComponent;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -13,6 +15,7 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
@@ -21,4 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
-require __DIR__.'/auth.php';
+Route::get('boards/{board}', BoardComponent::class)
+    ->name('boards.show')
+    ->middleware('auth');
+
+require __DIR__ . '/auth.php';

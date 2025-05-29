@@ -15,7 +15,8 @@
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <div class="pl-4 pt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                        {{ __('Your Boards') }}
+                        <h1 class="font-bold mb-2">Your Boards</h1>
+                        @livewire('components.boards-nav-list')
                     </div>
                 </flux:navlist.group>
             </flux:navlist>
