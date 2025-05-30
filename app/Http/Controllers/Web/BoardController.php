@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Board;
+use App\Services\BoardServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
+    protected $boardServices;
+
+    public function __construct(BoardServices $boardServices)
+    {
+        $this->boardServices = $boardServices;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -36,7 +45,10 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
-        //
+        $board = $this->boardServices->show($board, Auth::user());
+        return view('board', [
+            'board' => $board,
+        ]);
     }
 
     /**

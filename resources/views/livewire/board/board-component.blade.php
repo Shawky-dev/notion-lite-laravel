@@ -1,5 +1,3 @@
-<x-layouts.app :title="__('Board')">
-   <div>
+<div>
        {{$board->title}}
 </div> 
-</x-layouts.app>

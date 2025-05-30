@@ -8,10 +8,19 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 class BoardRelatedServices
 {
-    public function AuthUserForBoard(Board $board, User $user, string $err_message)
+    public function AuthUserForBoard(Board $board, User $user): bool
     {
         if (!$board->users()->where('user_id', $user->id)->exists()) {
-            throw new AuthorizationException($err_message);
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public function handleNonAuth(Board $board, User $user, string $errmsg)
+    {
+        $isAuthorized = $this->AuthUserForBoard($board, $user);
+        if (!$isAuthorized) {
+            throw new AuthorizationException($errmsg);
         }
     }
 }

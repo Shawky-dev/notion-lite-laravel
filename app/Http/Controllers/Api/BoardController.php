@@ -38,13 +38,7 @@ class BoardController extends ApiController
      */
     public function show(Board $board, Request $request)
     {
-        $user = $request->user();
-        if (!$board->users()->where('user_id', $user->id)->exists()) {
-            return $this->sendError('Unauthorized access', [], 403);
-        }
-
-        $board->load(['users', 'sections.tasks']);
-
+        $board = $this->boardServices->show($board, $request->user());
         $success['board'] = $board;
         return $this->sendResponse($success, 'Board retrieved successfully');
     }
