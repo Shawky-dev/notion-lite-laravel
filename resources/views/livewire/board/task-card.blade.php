@@ -18,7 +18,7 @@
         <div class="flex-shrink-0 ">
             {{-- Checkbox Status --}}
             <div class="appearance-none flex items-center justify-center text-2xl p-[0.1rem] border-2 border-neutral-500 hover:border-neutral-300 rounded-lg w-7 h-7"
-                wire:click="changeTaskStatus">
+                wire:click="changeTaskStatus" onclick="event.stopPropagation()">
                 @if ($task->status)
                 <flux:icon.check class=" text-neutral-00" />
                 @endif

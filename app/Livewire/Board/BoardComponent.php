@@ -3,6 +3,7 @@
 namespace App\Livewire\Board;
 
 use App\Models\Board;
+use Flux\Flux;
 use Livewire\Component;
 
 class BoardComponent extends Component
