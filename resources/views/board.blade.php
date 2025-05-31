@@ -15,7 +15,8 @@
             <flux:button>+ Add Section</flux:button>
         </flux:modal.trigger>
         <flux:modal name="add-section" class="md:w-96">
-            @livewire('board.add-section',['board'=>$board])
+            @livewire('board.add-section',['board'=>$board],key($board->id))
         </flux:modal>
+
     </div>
 </x-layouts.app>
