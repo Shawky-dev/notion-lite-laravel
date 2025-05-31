@@ -34,10 +34,11 @@ class Board extends Model
 
         foreach ($defaultSections as $sectionTitle => $tasks) {
             $section = $board->sections()->create(['title' => $sectionTitle]);
-            foreach ($tasks as $taskTitle) {
+            foreach ($tasks as $index => $taskTitle) {
                 $section->tasks()->create([
                     'title' => $taskTitle,
-                    'user_id' => $creatorUser->id
+                    'user_id' => $creatorUser->id,
+                    'description' => 'desc' . $index,
                 ]);
             }
         }

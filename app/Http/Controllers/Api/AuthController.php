@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Http\Services\AuthServices;
 use App\Models\User;
+use App\Services\AuthServices;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends ApiController
