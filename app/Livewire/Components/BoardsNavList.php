@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class BoardsNavList extends Component
@@ -17,8 +18,15 @@ class BoardsNavList extends Component
         $this->boards = $user->boards()->get();
     }
 
+
+    #[On('board-created')]
     public function render()
     {
-        return view('livewire.components.boards-nav-list');
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $this->boards = $user->boards()->get();
+        return view('livewire.components.boards-nav-list', [
+            'boards' => $this->boards
+        ]);
     }
 }
