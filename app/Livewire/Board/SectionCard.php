@@ -25,11 +25,15 @@ class SectionCard extends Component
     #[On('task-created.{section.id}')]
     public function refreshSection()
     {
-        // The {section} placeholder will be automatically replaced 
-        // with $this->section->id at runtime
+        $this->section = Section::with('tasks')->find($this->section->id);
     }
+
     public function render()
     {
-        return view('livewire.board.section-card');
+
+        return view(
+            'livewire.board.section-card',
+            ['section' => $this->section]
+        );
     }
 }
