@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Board;
 
+use App\Http\Requests\Task\ChangeTaskStatusRequest;
 use App\Models\Task;
 use App\Models\User;
 use App\Services\TaskServices;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class TaskCard extends Component
@@ -23,7 +25,15 @@ class TaskCard extends Component
     public function changeTaskStatus(TaskServices $taskServices)
     {
         $data = ['status' => !$this->task->status];
-        $newTask = $taskServices->update($data, $this->task, Auth::user());
+
+        $validator = Validator::make($data, (new ChangeTaskStatusRequest())->rules());
+
+        if ($validator->fails()) {
+            $this->addError('status', $validator->errors()->first('status'));
+            return;
+        }
+
+        $taskServices->update($data, $this->task, Auth::user());
     }
 
     public function render()

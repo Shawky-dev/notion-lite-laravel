@@ -3,11 +3,11 @@
     <div class="flex flex-row justify-between">
         <div>
             {{-- Task Title --}}
-            <h4 class="{{$task->status ? 'line-through' : ''}} text-sm font-medium text-gray-100">
+            <h4 class="{{$task->status ? 'line-through text-gray-500' : 'text-gray-100'}} text-sm font-medium ">
                 {{ $task->title }}
             </h4>
             @if ($task->description)
-                <p class="text-xs text-gray-200 line-clamp-2 mb-3">
+                <p class=" {{$task->status ? 'line-through text-gray-500' : 'text-gray-200'}} text-xs line-clamp-2 mb-3">
                     {{ $task->description }}
                 </p>
             @endif
