@@ -11,10 +11,12 @@ use Livewire\Component;
 class SectionCard extends Component
 {
     public $section;
+    public $tasks;
 
     public function mount(Section $section)
     {
         $this->section = $section;
+        $this->tasks = $section->tasks()->get();
     }
     public function delete(SectionServices $sectionServices)
     {
@@ -25,7 +27,8 @@ class SectionCard extends Component
     #[On('tasks-updated.{section.id}')]
     public function refreshSection()
     {
-        $this->section = Section::with('tasks')->find($this->section->id);
+        $this->section = $this->section->refresh();
+        $this->tasks = $this->section->tasks()->get();
     }
 
     public function render()
