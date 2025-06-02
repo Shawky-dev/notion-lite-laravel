@@ -16,7 +16,7 @@ class SectionList extends Component
         $this->board = $board;
     }
 
-    #[On('section-created')]
+    #[On('section-updated')]
     public function refreshSections()
     {
         // The component will automatically re-render

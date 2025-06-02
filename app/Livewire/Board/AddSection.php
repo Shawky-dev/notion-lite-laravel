@@ -28,7 +28,7 @@ class AddSection extends Component
         $sectionServices->store($data, $this->board, Auth::user());
         Flux::modal('add-section')->close();
 
-        $this->dispatch('section-created')->to('board.section-list');
+        $this->dispatch('section-updated')->to('board.section-list');
     }
     public function mount(Board $board)
     {

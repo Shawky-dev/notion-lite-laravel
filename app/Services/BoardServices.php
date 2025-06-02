@@ -39,4 +39,10 @@ class BoardServices extends BoardRelatedServices
         $this->handleNonAuth($board, $board_user, 'You are not authorized to add people to this board.');
         $board->addUser($new_user);
     }
+    public function removeUser(Board $board, User $board_user, User $remove_user)
+    {
+        $this->handleNonAuth($board, $board_user, 'You are not authorized to remove people from this board.');
+
+        $board->users()->detach($remove_user->id);
+    }
 }

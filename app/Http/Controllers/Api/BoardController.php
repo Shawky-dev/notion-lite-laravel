@@ -69,4 +69,11 @@ class BoardController extends ApiController
         $success['board'] = $board->fresh(['users']);
         return $this->sendResponse($success, 'User added to board successfully');
     }
+    public function removeUser(Board $board, User $remove_user, Request $request)
+    {
+        $this->boardServices->removeUser($board, $request->user(), $remove_user);
+
+        $success['board'] = $board->fresh(['users']);
+        return $this->sendResponse($success, 'User removed from board successfully');
+    }
 }
