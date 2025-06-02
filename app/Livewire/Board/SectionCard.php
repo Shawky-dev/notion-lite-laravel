@@ -22,7 +22,7 @@ class SectionCard extends Component
         $this->dispatch('section-created')->to('board.section-list');
     }
 
-    #[On('task-created.{section.id}')]
+    #[On('tasks-updated.{section.id}')]
     public function refreshSection()
     {
         $this->section = Section::with('tasks')->find($this->section->id);

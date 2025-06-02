@@ -22,7 +22,7 @@ class TaskComponent extends Component
 
         Flux::modals()->close();
 
-        $this->dispatch("task-created.{$this->task->section_id}");
+        $this->dispatch("tasks-updated.{$this->task->section_id}");
     }
 
     public function render()

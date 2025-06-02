@@ -25,7 +25,7 @@ class AddTask extends Component
 
         Flux::modal('add-task-' . $this->section->id)->close();
 
-        $this->dispatch("task-created.{$this->section->id}");
+        $this->dispatch("tasks-updated.{$this->section->id}");
     }
 
 
