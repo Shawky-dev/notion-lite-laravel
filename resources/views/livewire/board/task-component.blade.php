@@ -17,7 +17,7 @@
         <div class="flex flex-row space-x-2">
             <flux:icon.pencil-square
                 class="text-neutral-300 hover:text-neutral-600 hover:cursor-pointer transition-colors duration-100" />
-            <flux:icon.trash
+            <flux:icon.trash wire:click='deleteTask'
                 class="hover:text-red-600 text-neutral-300 hover:cursor-pointer transition-colors duration-100" />
         </div>
     </div>

@@ -18,13 +18,17 @@
     {{-- Tasks Container --}}
     <div class="p-2 flex flex-col gap-2 min-h-[200px]">
         @foreach ($section->tasks()->get() as $task)
+        @if ($task)
         <flux:modal.trigger name="task-modal-{{$task->id}}">
-            @livewire('board.task-card', ['task' => $task], key($task->id))
+            @livewire('board.task-card', ['task' => $task], key('card-' . $task->id))
         </flux:modal.trigger>
+
         <flux:modal name="task-modal-{{$task->id}}" class="md:w-full h-full">
-            @livewire('board.task-component', ['task' => $task], key($task->id))
+            @livewire('board.task-component', ['task' => $task], key('comp-' . $task->id))
         </flux:modal>
+        @endif
         @endforeach
+
         {{-- Add Task Button --}}
         <flux:modal.trigger name="add-task-{{$section->id}}">
             <button class="w-full p-2 text-left text-gray-300 hover:bg-neutral-800 rounded">
@@ -38,4 +42,5 @@
             </button>
         </flux:modal.trigger>
     </div>
+
 </div>
