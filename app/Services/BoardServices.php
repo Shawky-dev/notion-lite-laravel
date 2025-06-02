@@ -34,4 +34,9 @@ class BoardServices extends BoardRelatedServices
         $board->load(['users', 'sections.tasks']);
         return $board;
     }
+    public function addUser(Board $board, User $board_user, User $new_user)
+    {
+        $this->handleNonAuth($board, $board_user, 'You are not authorized to add people to this board.');
+        $board->addUser($new_user);
+    }
 }

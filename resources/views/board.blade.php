@@ -4,9 +4,15 @@
         <h1>
             {{$board->title}}
         </h1>
-        <h1>
-            members
-        </h1>
+        <div>
+
+            <flux:modal.trigger name="add-user">
+                @livewire('board.members-list', ['board' => $board])
+            </flux:modal.trigger>
+            <flux:modal name='add-user' class=" md:w-96 h-full">
+                @livewire('board.add-user', ['board' => $board])
+            </flux:modal>
+        </div>
     </div>
     <div class="flex flex-row space-x-3 mt-4 overflow-x-scroll h-full max-h-11/12">
 

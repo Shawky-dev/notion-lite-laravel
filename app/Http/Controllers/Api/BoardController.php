@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Board\CreateBoardRequest;
 use App\Http\Requests\Board\UpdateBoardRequest;
 use App\Models\Board;
+use App\Models\User;
 use App\Services\BoardServices;
 use Illuminate\Http\Request;
 
@@ -43,9 +44,7 @@ class BoardController extends ApiController
         return $this->sendResponse($success, 'Board retrieved successfully');
     }
 
-    /**{
-    "message": "App\\Services\\BoardServices::update(): Argument #1 ($data) must be of type array, App\\Models\\Board given, called in E:\\Coding\\Laravel\\livewire-notion-lite\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php on line 46"
-}
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateBoardRequest $request, Board $board)
@@ -62,5 +61,12 @@ class BoardController extends ApiController
     {
         $this->boardServices->destroy($board, $request->user());
         return $this->sendResponse([], 'Board deleted successfully');
+    }
+    public function addUser(Board $board, User $new_user, Request $request)
+    {
+        $this->boardServices->addUser($board, $request->user(), $new_user);
+
+        $success['board'] = $board->fresh(['users']);
+        return $this->sendResponse($success, 'User added to board successfully');
     }
 }
