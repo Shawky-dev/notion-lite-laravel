@@ -21,7 +21,9 @@
                 class="hover:text-red-600 text-neutral-300 hover:cursor-pointer transition-colors duration-100" />
         </div>
     </div>
-
+    <div class="h-full">
+        @livewire('board.task-comment-list', ['task' => $task], key('comement-list'. $task->id))
+    </div>
     <!-- Task Footer -->
     <div class="flex items-center justify-between pt-2 text-sm text-gray-400 border-t border-neutral-700">
         <!-- Created By -->
