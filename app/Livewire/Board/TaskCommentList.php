@@ -40,6 +40,7 @@ class TaskCommentList extends Component
         $this->parent_comments = $this->task->comments()->whereNull('parent_id')->get();
         $this->dispatch('comments-update');
         $this->text = '';
+        $this->parent = null;
     }
 
     public function render()
